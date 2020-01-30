@@ -1,0 +1,173 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+a.navbar-brand{
+  background: linear-gradient(to left, rgb(22, 134, 125), #333 50%, rgb(14, 11, 11) 75%, rgb(12, 11, 11) 75%);
+}
+a.nav-link{
+padding-left: 10%;
+}
+
+div#responsive-navbar-nav.navbar-collapse{
+  padding-left: 75%;
+} 
+
+.bg-primary{
+  background: linear-gradient(to left, rgb(22, 134, 125), #333 50%, rgb(14, 11, 11) 75%, rgb(12, 11, 11) 75%);
+}
+
+form{
+  margin-top: 10%;
+  margin-left: 40%;
+}
+
+input.form-control{
+  width:30%;
+  border: 1.5px solid rgb(22, 134, 125)
+}
+
+select#exampleFormControlSelect1.form-control{
+  width:30%;
+  border: 1.5px solid rgb(22, 134, 125)
+}
+
+div.form-group.Age{
+  display: grid;
+}
+
+input.takeip{
+  width:30%;
+  border: 1.5px solid rgb(22, 134, 125);
+  height:140%
+}
+
+p.h5.mb-4{
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  padding-left: 7%;
+}
+
+button.btn.btn-register{
+  background:rgb(22, 134, 125);
+  color: white;
+  margin-top: 2%;
+  width: 11%;
+    height: 6vh;
+  -webkit-transition: color 300ms;
+  transition: color 10ms;
+  position: relative;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale
+}
+
+button.btn.btn-register:before{
+  margin-top: 3%;
+  content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to left, rgb(22, 134, 125), #333 50%, rgb(14, 11, 11) 75%, rgb(12, 11, 11) 75%);
+    -webkit-transform: scaleX(0);
+    transform: scaleX(0);
+    -webkit-transform-origin: 50%;
+    transform-origin: 50%;
+    -webkit-transition-property: transform;
+    transition-property: transform;
+    -webkit-transition: 300ms ease-out;
+    transition: 300ms ease-out;
+ 
+}
+
+button.btn.btn-register:hover:before{
+-webkit-transform: scaleX(1);
+transform: scaleX(1);
+transform: scale(1.05); 
+  /* transition: transform .2s;  */
+  border-radius: 5px;
+  margin-top: 0%;
+}
+table{
+  background: linear-gradient(to left, #333, #333 50%,  rgb(22, 134, 125)75%, #333 75%);
+}
+
+.fa-user-times{
+  padding: 12%;
+  padding-top: 7%;
+  margin-right: -170%;
+  margin-left: -23%;
+}
+
+.fa-user-times:before {
+  content: "\f235";
+  font-size: 140%;
+}
+
+.fa-user-times:hover {
+  content: "\f235";
+  color: red;
+  border-radius: 10px;
+ background:linear-gradient(to left, rgb(12, 11, 11) 50% , rgb(22, 134, 125));
+}
+
+i.fa.fa-eye{
+  position: absolute;
+  right: 13%;
+  padding-top: 1.1%;
+  padding-left: 1.3%;
+  width: 4%;
+  padding-bottom: 1.3%;
+  border-radius: 200%;
+}
+
+i.fa.fa-eye:before{
+  font-size: 120%;
+}
+
+i.fa.fa-eye:hover {
+  content: "\f235";
+  color: red;
+ background:linear-gradient(to left, rgb(12, 11, 11) 50% , rgb(22, 134, 125));
+}
+
