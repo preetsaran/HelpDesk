@@ -24,8 +24,8 @@ class MyApp extends Component {
     this.state.Token = localStorage.getItem("Token");
        
     if (this.state.Token == null)
-    {
-      this.state.loggedIn = false;
+      {
+       this.state.loggedIn = false;
       }
   }
 
