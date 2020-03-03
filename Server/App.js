@@ -6,6 +6,7 @@ const Upload= require('./Databases/Upload');
 const fileUpload = require('express-fileupload')
 const http = require('http');
 const fs = require('fs');
+const port = process.env.PORT || 4000;
 var rimraf = require("rimraf");
 path = require('path')
 var directoryPath = `C:/Users/saran-champakali/Desktop/Dashboard-master/server/public/uploads/`;
@@ -289,7 +290,16 @@ app.delete('/student/:id', async(req, res) => {
 }); 
 
 
-app.listen(4000,function(){
+if (process.env.NODE_ENV === 'production') {
+    // Set static folder
+    app.use(express.static('student/build'));
+  
+    app.get('*', (req, res) => {
+      res.sendFile(path.resolve(__dirname, 'student', 'build', 'index.html'));
+    });
+  }
+
+app.listen(port,function(){
     console.log("server is listening at 4000")
 })
 
