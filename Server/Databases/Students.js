@@ -8,13 +8,12 @@ mongoose.connect(DB,{
     useUnifiedTopology:true 
 })
 .then(function(conn){
-    // console.log(conn.connection);nt
-    // console.log("student");
+    console.log("student DB");
 });
 
 var StudentSchema=new mongoose.Schema({
     Name: {type:String,required:[true,"Name is required field"]},
-    Enrollment_Number:{type:String,required:[true,"Enrollment Number is required field"]},
+    Enrollment_Number:{type:String,required:[true,"Enrollment Number is required field"],unique:true},
     password: { type: String, required: [true, "Password is required field"] },
     courseID: { type: mongoose.Schema.Types.ObjectId, ref: 'courses', required: [true, "Course ID is required field"] }
 })

@@ -40,26 +40,32 @@
 a.navbar-brand{
   background: linear-gradient(to left, rgb(22, 134, 125), #333 50%, rgb(14, 11, 11) 75%, rgb(12, 11, 11) 75%);
 }
+
 a.nav-link{
 padding-left: 10%;
 }
 
 div#responsive-navbar-nav.navbar-collapse{
-  padding-left: 75%;
+  padding-left: 74%;
 } 
 
 .bg-primary{
   background: linear-gradient(to left, rgb(22, 134, 125), #333 50%, rgb(14, 11, 11) 75%, rgb(12, 11, 11) 75%);
 }
 
+div.SearchResults{
+  display: flex;
+}
 form{
-  margin-top: 10%;
+  margin-top: 3%;
   margin-left: 40%;
+  width: 60%;
 }
 
 input.form-control{
   width:30%;
-  border: 1.5px solid rgb(22, 134, 125)
+  border: 1.5px solid rgb(22, 134, 125);
+  height:6vh
 }
 
 select#exampleFormControlSelect1.form-control{
@@ -67,21 +73,95 @@ select#exampleFormControlSelect1.form-control{
   border: 1.5px solid rgb(22, 134, 125)
 }
 
+form.LoginForm{
+  display: grid;
+}
+
+label.labels{
+  width:30%;
+  height:140%;
+  padding-top:2%;
+  font-size: 120%;
+}
+
+p.Login{
+  width: 30%;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  /* margin-left: 2%; */
+  padding-left: 9.5%;
+  background: linear-gradient(to left, rgb(22, 134, 125), #333 55%, rgb(14, 11, 11) 75%, rgb(12, 11, 11) 5%);
+  height: 7vh;
+  color: white;
+}
+
 div.form-group.Age{
   display: grid;
 }
 
-input.takeip{
+input{
   width:30%;
   border: 1.5px solid rgb(22, 134, 125);
   height:140%
 }
 
+button.text-right.submit{
+  background:rgb(22, 134, 125);
+  border: solid rgb(22, 134, 125);
+  color: white;
+  margin-top: 3%;
+  padding-right: 3%;
+  width: 11%;
+    height: 6vh;
+  -webkit-transition: color 300ms;
+  transition: color 10ms;
+  position: relative;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 5px;
+  -moz-osx-font-smoothing: grayscale
+}
+
+button.text-right.submit:before{
+  margin-top: 3%;
+  content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to left, rgb(22, 134, 125), #333 50%, rgb(14, 11, 11) 75%, rgb(12, 11, 11) 75%);
+    -webkit-transform: scaleX(0);
+    transform: scaleX(0);
+    -webkit-transform-origin: 50%;
+    transform-origin: 50%;
+    -webkit-transition-property: transform;
+    transition-property: transform;
+    -webkit-transition: 300ms ease-out;
+    transition: 300ms ease-out;
+ 
+}
+
+button.text-right.submit:hover:before{
+  -webkit-transform: scaleX(1);
+  transform: scaleX(1);
+  transform: scale(1.05); 
+    /* transition: transform .2s;  */
+    border-radius: 5px;
+    margin-top: 0%;
+  }
 p.h5.mb-4{
   font-size: 2rem;
   margin-bottom: 2rem;
   padding-left: 7%;
-}
+  background: linear-gradient(to left, rgb(22, 134, 125), #333 55%, rgb(14, 11, 11) 75%, rgb(12, 11, 11) 5%);
+  width:30%;
+  height: 6vh;
+  color: white;
+} 
 
 button.btn.btn-register{
   background:rgb(22, 134, 125);
@@ -128,16 +208,19 @@ transform: scale(1.05);
   border-radius: 5px;
   margin-top: 0%;
 }
+
 table{
-  background: linear-gradient(to left, #333, #333 50%,  rgb(22, 134, 125)75%, #333 75%);
+  background: linear-gradient(to left, #333, #333 50%,  rgb(22, 134, 125)100vw, #333 75%);
+}
+
+table td {
+  width: 76px;
 }
 
 .fa-user-times{
-  padding: 12%;
-  padding-top: 7%;
-  margin-right: -170%;
-  margin-left: -23%;
+  padding: 11px;
 }
+
 
 .fa-user-times:before {
   content: "\f235";
@@ -147,18 +230,13 @@ table{
 .fa-user-times:hover {
   content: "\f235";
   color: red;
-  border-radius: 10px;
+  border-radius: 30px;
  background:linear-gradient(to left, rgb(12, 11, 11) 50% , rgb(22, 134, 125));
 }
 
 i.fa.fa-eye{
-  position: absolute;
-  right: 13%;
-  padding-top: 1.1%;
-  padding-left: 1.3%;
-  width: 4%;
-  padding-bottom: 1.3%;
-  border-radius: 200%;
+  padding: 13px;
+   border-radius: 30px;
 }
 
 i.fa.fa-eye:before{
@@ -171,3 +249,177 @@ i.fa.fa-eye:hover {
  background:linear-gradient(to left, rgb(12, 11, 11) 50% , rgb(22, 134, 125));
 }
 
+th.LoggedIN{
+  width: 10%;
+}
+
+div.form-check.col-xs-3{
+display: flex;
+margin-left: 18px;    
+}
+
+div.form-group.container.row{
+  margin-left: -200px;
+  width:42vw;
+}
+
+input#exampleRadios.form-check-input{
+  height: 12px;
+  margin-left: -19%;
+}
+
+div.form-group.upload{
+  display: flex;
+
+}
+
+input.form-control.upload{
+  width: 70%;
+  height: 100%;
+}
+
+div .form-main.upload{
+  margin-top: 13%;
+  margin-left: -50%;
+}
+
+  
+div.PROFILE{
+  width: 100%;
+  height:94vh;
+  background:#003131;
+  position: absolute;
+  display: flex;
+}
+
+section.MYPROFILE{
+    width: 35%;
+    margin-left: 200px;
+    margin-top: 2%;
+    height: 83vh;
+    border-radius: 6%;
+    text-align: center;
+    color:white;
+    background: linear-gradient(to left, rgb(22, 134, 125), #333 50%, rgb(14, 11, 11) 75%, rgb(12, 11, 11) 75%);
+}
+
+section.MYUPLOADS{
+    width: 40%;
+    /* background: rgb(97, 86, 86); */
+    margin-left: 70px;
+    margin-top: 2%;
+    height: 83vh;
+    border-radius: 6%;
+    text-align: center;
+    color: white;
+    background: linear-gradient(to left, rgb(22, 134, 125), #333 50%, rgb(14, 11, 11) 75%, rgb(12, 11, 11) 75%);
+    /* background: linear-gradient(to left, rgb(22, 134, 125), white 50%,rgb(22, 134, 125)); */
+}
+
+div.progress{
+  position: absolute;
+  width: 30%;
+  right: 12%;
+  top: 25%;
+}
+
+.MYUPLOADS h1{
+  padding-top: 5%;
+}
+
+
+img.userImg{
+margin-top: 7%;
+height: 35vh;
+width: 16vw;
+border-radius: 5%;
+}
+
+div.userDesc{
+  margin-top: 10%;
+}
+
+h3.userVal{
+  width:20vw
+}
+
+div.uservValues.text-justify{
+  margin-top: 10%;
+  padding-left: 12%;
+}
+
+div.desc{
+  display: flex;
+  padding: 11%;
+  padding-left: 13%;
+}
+
+input.form-control.upload {
+  width: 20vw;
+  height: 6.8vh;
+}
+
+button.btn.btn-register.upload{
+  width:40%;
+  margin-right: 79%;
+  margin-bottom: 12%;
+}
+
+div.UploadedFile{
+  margin-top: 40.5rem;
+  margin-left: 30%;
+}
+
+div.INFO{
+  width: 32vw;
+}
+
+section.MYINFOPROFILE{
+  width: 60%;
+  margin-top: 9%;
+  height: 83vh;
+  border-radius: 6%;
+  text-align: center;
+  color:white;
+  margin-left: 15%;
+}
+
+div.descinfo{
+  display: flex;
+  padding-top: 15%;
+}
+
+div.InfoWrapper{
+  background: linear-gradient(to left, rgb(14, 11, 11) 75%, #333 20%,  rgb(12, 11, 11) 75%,rgb(22, 134, 125));
+  display: flex;
+}
+
+td.info_icon{
+  width: 1%;
+}
+
+table.table.table-dark.info{
+  width:100vw;
+  background: linear-gradient(to left, rgb(14, 11, 11) 75%, #333 20%,  rgb(12, 11, 11) 75%,rgb(22, 134, 125));
+
+}
+
+h5.userVal{
+  width:12vw
+}
+
+form#open-upload-form.form-horizontal{
+  margin-top: 15%;
+}
+
+h1.text-center.mP{  
+  color: white;
+  background:#003131;
+  padding-bottom: 0.8%;
+  
+}
+
+div.MYUPLOADSLIST{
+  margin-top: 41rem;
+  padding-top: 2.1%;
+}

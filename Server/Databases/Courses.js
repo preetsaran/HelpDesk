@@ -8,7 +8,7 @@ mongoose.connect(DB,{
     useUnifiedTopology:true
 })
 .then(function(conn){
-    console.log("connected to db");
+    console.log("connected to Courses db");
 });
 
 const courseSchema=new mongoose.Schema({

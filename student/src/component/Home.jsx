@@ -1,138 +1,167 @@
 import React, { Component } from 'react';
 import axios from "axios";
 import { Redirect } from "react-router-dom"
-// const LO=<Redirect to="/login"></Redirect>
-// const LI=<Redirect to="/loggedIn"></Redirect>
+import fileDownload from 'js-file-download';
 class Home extends Component {
-  state = { data: [], Query: "", name: "", age: "", course: "",loggedIn : true }
+  state = { data: [], Query: "", name: "", age: "", course: "", loggedIn: true, green: false, red: false, uploadData:[]}
   constructor(props) {
     super(props)
     const Token = localStorage.getItem("Token");
-    // let loggedIn = true;
     if (Token == null) {
         this.state.loggedIn = false;
     }
   }
-  allStu = []
+  allStu = [];
  
-  componentDidMount() {
+  componentDidMount()
+  {
     
       axios.get("/course").then(response=>{
             var allCourse=response.data.courseData;
              this.allStu=response.data.studentData;
             
            var studArr=[]
-            for(let i=0;i<this.allStu.length;i++){
-              for(let j=0;j<1;j++) 
-              {var id= this.allStu[i]["courseID"];
-               studArr.push(allCourse.filter(c=>{
-                 if(c._id===id){
-                           return c.courseName
-                 }
-               }))
-             
-               this.allStu[i].course=studArr[i][j].courseName;
-              
-              }     }  
+        for (let i = 0; i < this.allStu.length; i++)
+        {
+          for(let j=0;j<1;j++)  
+          {
+            var id = this.allStu[i]["courseID"];
+            studArr.push(allCourse.filter(c =>
+            {
+              return (c._id === id)
+            }))
+            this.allStu[i].course=studArr[i][j].courseName; 
+          }
+        }  
               
               this.setState({data:[...this.state.data,...this.allStu]})
-              // console.log(this.state.data)
              
-         })
-
-      
-        
-    }
+      })
+    
+     axios.get("/upload").then(response=>{
+          var allUploads=response.data.uploadData;
+          this.setState({ uploadData: allUploads });
+     })
+    
+  }
   
-    SearchQuery=(event)=>{     
+  SearchQuery = (event) => {     
       this.setState({Query:event.currentTarget.value})
     }
     
-    handleQuery=(query)=>{
-       let data=this.state.data.filter((student)=>{
-        return ((student["course"].toLowerCase().includes((query).toLowerCase()))
-                || (student["Name"].toLowerCase().includes((query).toLowerCase()))||student._id.includes(query))
+  handleQuery=(query)=>{
+      let data = this.state.uploadData.filter((udata) => {
+        return ((udata["Subject"].toLowerCase().includes((query.toLowerCase()).toLowerCase()))
+                || (udata["Topic"].toLowerCase().includes((query.toLowerCase()).toLowerCase()))||udata["Credits"].toLowerCase().includes(query.toLowerCase()))
      })
-    //  console.log(data);
      return data;
 
     }
   
-   handleDelete= async (event)=>{
-    let myELement = event.currentTarget.parentElement.parentElement.innerText;
-    //  console.log(event.currentTarget.parentElement.parentElement.innerText);
-
-     let AllData = await axios.get("course");
-    //  console.log(AllData.data.studentData);
-     let student = AllData.data.studentData.filter((stud) => {
-       if (myELement.includes(stud.Enrollment_Number)) {
-         return stud;
+  
+  handleDelete = async (student) => {
+    let confirm = window.confirm("Do you really want to delete?");
+    if (confirm) {
+     let studID = student._id;
+      await axios.delete(`student/${studID}`, {
+        headers: {
+          enroll:student.Enrollment_Number
         }
-     })
-     console.log(student[0]._id);
-     let studID = student[0]._id;
-
-     const obj = await axios.delete(`student/${studID}`);
+      });
      alert("Student Record Deleted");
-     window.location.reload();
-    
+     let newData = await axios.get("course");
+     this.setState({data:newData.data.studentData})
+    }
   }
   
-  handleInfo = (event) => {
-    console.log(this.state.loggedIn);
-    if(this.state.loggedIn){
-      window.location.replace("http://localhost:3000/loggedIn")
-      // return <Redirect to="/loggedIn"></Redirect>
+  handleInfo = async (student) => {
+
+    let stud= JSON.stringify(student);
+    localStorage.setItem("student", stud);
     
+    if (this.state.loggedIn) {
+      this.setState({green:true})
     }
     else {
-      window.location.replace("http://localhost:3000/login")
-      // return <Redirect to="/login"></Redirect>
+      this.setState({red:true})
+    }
+    }
+
+  handleDownload = async (student) => {
+      try {
+        let enroll = student.enroll;
+        let filename = student.FileName;
+        let res = await axios.get('/download', {
+          headers: {
+            enroll,
+            filename
+          }
+        },{ responseType: 'arraybuffer' });
+         
+        console.log(res.data); 
+        fileDownload(res.data, `${filename}`);
+        
+        }
+      catch (error) {
+        console.log(error);
+      }
       
-     }
-  }
- 
-  
+    }
   
   render() { 
+
       
-      // console.log(this.state.data)
-      let{data,Query,age,name,course}=this.state;
+    if (this.state.green) {
+      return <Redirect to="/info"></Redirect>
+    }
+    else if (this.state.red) {
+      return <Redirect to="/login"></Redirect>
+    }
+
+      let{data,Query}=this.state;
       let newArray=[];
-      if(Query!=""){
+      if(Query!==""){
         newArray=this.handleQuery(Query)
       }
       else{
-        newArray=data;
-      }
-        return ( 
-               <React.Fragment>
-          <input class="form-control" type="text" value={this.state.Query} placeholder="Search.." onChange={this.SearchQuery} ></input>
+        newArray=this.state.uploadData;
+    }
+    
+    console.log(newArray.length);
+
+        return (
+          <React.Fragment>
+            <div class="SearchResults"> 
+            <input class="form-control" type="text" value={this.state.Query} placeholder="SearchBy...(Topic,Subject,Name)" onChange={this.SearchQuery} ></input>
+              <h6 class="mt-3 ml-2">{` ${newArray.length}` + ' results'}</h6>
+              </div>
           <table class="table table-dark">
   <thead>
     <tr>
-      <th scope="col">Enrollment No.</th>
-      <th scope="col">Name</th>
-      <th scope="col">Course</th>
-      {/* <th class="Result" scope="col">Result</th> */}
+      <th scope="col">Subject</th>
+      <th scope="col">Topic</th>
+      <th scope="col">Upload Date</th>
+      <th scope="col">Credits</th>
+      <th scope="col">Filesize</th>  
     </tr>
-  </thead>
+  </thead> 
   <tbody>
       
-      {newArray.map((student)=>{
+      {newArray.map((data)=>{
           return(
             <tr>
-            <td>{student.Enrollment_Number}</td>
-            <td>{student.Name}</td>
-            <td>{student.course}</td>
-            <div><i className="fa fa-eye" onClick={this.handleInfo}></i></div>
-            <div><i className="fa fa-user-times" onClick={this.handleDelete}></i></div> 
-          </tr>
+            <td>{data.Subject}</td>
+            <td>{data.Topic}</td>
+            <td>{data.date}</td>
+            <td>{data.Credits}</td>
+            <td>{data.FileSize}</td>
+            <td className="info_icon"><i class="fa fa-download" onClick={() => { this.handleDownload(data) }}></i></td>
+            </tr>
           )
       })}
     
   </tbody>
-            </table>
+  </table>
     
 </React.Fragment>
          );
